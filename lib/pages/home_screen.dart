@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/cubit/app_Cubit/app_cubit.dart';
 import 'package:news_app/network/dio_helper.dart';
+import 'package:news_app/pages/search_screen.dart';
 import 'package:news_app/pages/setteings_screen.dart';
 
 import '../cubit/news_cubit/news_cubit.dart';
@@ -34,6 +35,13 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               actions: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: ((context) => SearchScreen())));
+                  },
+                  icon: Icon(Icons.search),
+                ),
                 IconButton(
                   onPressed: () {},
                   icon: Icon(Icons.settings),
