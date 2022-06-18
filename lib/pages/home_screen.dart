@@ -11,56 +11,51 @@ import '../cubit/news_cubit/news_cubit.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NewsCubit()..getScience(),
-      child: BlocConsumer<NewsCubit, NewsState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
-        builder: (context, state) {
-          var cubit = NewsCubit.get(context);
-          return Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                onPressed: () {
-                  AppCubit.get(context).changeThemeMode();
-                },
-                icon: Icon(
-                  AppCubit.get(context).isDark
-                      ? Icons.brightness_3_sharp
-                      : Icons.brightness_7_sharp,
-                  color: AppCubit.get(context).isDark
-                      ? Colors.deepOrange
-                      : Colors.black,
-                ),
-              ),
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: ((context) => SearchScreen())));
-                  },
-                  icon: Icon(Icons.search),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.settings),
-                ),
-              ],
-              title: Text('News App'),
-              centerTitle: true,
-            ),
-            bottomNavigationBar: BottomNavigationBar(
-              onTap: (value) {
-                cubit.changeBottomNavBarIndex(value);
+    return BlocConsumer<NewsCubit, NewsState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = NewsCubit.get(context);
+        return Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                AppCubit.get(context).changeThemeMode();
               },
-              items: cubit.bottomItems,
-              currentIndex: cubit.currentIdex,
+              icon: Icon(
+                AppCubit.get(context).isDark
+                    ? Icons.brightness_3_sharp
+                    : Icons.brightness_7_sharp,
+                color: AppCubit.get(context).isDark
+                    ? Colors.deepOrange
+                    : Colors.black,
+              ),
             ),
-            body: cubit.screens[cubit.currentIdex],
-          );
-        },
-      ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: ((context) => SearchScreen())));
+                },
+                icon: Icon(Icons.search),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.settings),
+              ),
+            ],
+            title: Text('News App'),
+            centerTitle: true,
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            onTap: (value) {
+              cubit.changeBottomNavBarIndex(value);
+            },
+            items: cubit.bottomItems,
+            currentIndex: cubit.currentIdex,
+          ),
+          body: cubit.screens[cubit.currentIdex],
+        );
+      },
     );
   }
 }

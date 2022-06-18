@@ -7,6 +7,8 @@ import 'package:news_app/network/dio_helper.dart';
 import 'package:news_app/network/local/cache_helper.dart';
 import 'package:news_app/pages/home_screen.dart';
 
+import 'cubit/news_cubit/news_cubit.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
@@ -25,8 +27,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AppCubit()..changeThemeMode(fromShared: isDark),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => NewsCubit()..getScience(),
+        ),
+        BlocProvider(
+          create: (context) => AppCubit()..changeThemeMode(fromShared: isDark),
+        )
+      ],
       child: BlocConsumer<AppCubit, AppState>(
         listener: (context, state) {
           // TODO: implement listener

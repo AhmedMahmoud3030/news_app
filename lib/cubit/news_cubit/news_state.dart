@@ -39,3 +39,14 @@ class NewsGetSecinceErrorState extends NewsState {
 
   NewsGetSecinceErrorState(this.error);
 }
+
+/////////////////
+class NewsGetSearchLoadingState extends NewsState {}
+
+class NewsGetSearchSuccessState extends NewsState {}
+
+class NewsGetSearchErrorState extends NewsState {
+  final String error;
+
+  NewsGetSearchErrorState(this.error);
+}
